@@ -43,12 +43,7 @@ const Camera = (props) => {
       width = Number(drawingCanvas.getAttribute("width")),
       height = Number(drawingCanvas.getAttribute("height"));
 
-    drawingCtx.clearRect(
-      0,
-      0,
-      Number(drawingCanvas.getAttribute("width")),
-      Number(drawingCanvas.getAttribute("height"))
-    );
+    drawingCtx.clearRect(0, 0, width, height);
 
     Quagga.ImageDebug.drawPath(
       [
@@ -78,8 +73,8 @@ const Camera = (props) => {
       `https://world.openfoodfacts.org/api/v0/product/${result.codeResult.code}.json`
     )
       .then((res) => res.json())
-      // eslint-disable-next-line no-use-before-define
-      .then((res) => onInfoFetched(res));
+      .then((res) => onInfoFetched(res))
+      .catch((err) => console.log(err));
   };
 
   const onInfoFetched = (res) => {
