@@ -1,6 +1,7 @@
 import "./app.css";
 import { useState } from "react";
 import Camera from "./components/Camera";
+import FixBoxCam from "./components/FixBoxCam";
 import Options from "./components/Options";
 import { Grid } from "@material-ui/core";
 import { BARCODE_TYPES, RESOLUTIONS, WORKERS } from "./Constants";
@@ -11,8 +12,8 @@ function App() {
   const [workers, setWorkers] = useState(WORKERS[2].value);
 
   return (
-    <Grid container>
-      <Grid item xs={12} sm>
+    <Grid container spacing={2}>
+      <Grid item xs={12} sm={9}>
         <Camera
           {...{
             barcodeType,
@@ -30,6 +31,15 @@ function App() {
             setBarcodeType,
             setResolution,
             setWorkers,
+          }}
+        />
+      </Grid>
+      <Grid item xs={12} sm>
+        <FixBoxCam
+          {...{
+            barcodeType,
+            resolution,
+            workers,
           }}
         />
       </Grid>
