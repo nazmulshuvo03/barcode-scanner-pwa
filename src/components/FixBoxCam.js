@@ -3,8 +3,27 @@ import Quagga from "quagga";
 import VideoSkeleton from "./FixBoxVideo.skeleton";
 import { Grid, Switch, Typography } from "@material-ui/core";
 import { CAMERA_FACE } from "../Constants";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  video: {
+    width: "100%",
+    height: "100%",
+    overflow: "hidden",
+    "& video": {
+      height: "480px",
+      width: "480px",
+      objectFit: "cover",
+    },
+    "& canvas": {
+      height: "480px",
+      width: "480px",
+    },
+  },
+}));
 
 const Camera = (props) => {
+  const classes = useStyles();
   const { barcodeType, resolution, workers } = props;
   const [cameraOn, setCameraOn] = useState(false);
   const [cameraFace, setCameraFace] = useState(CAMERA_FACE[1].value);
@@ -203,7 +222,8 @@ const Camera = (props) => {
                 </div>
               ) : (
                 <div>
-                  <div className="video" id="fix_box_video" />
+                  {/* <div className="video" id="fix_box_video" /> */}
+                  <div className={classes.video} id="fix_box_video" />
                   {videoInit ? "" : <VideoSkeleton />}
                 </div>
               )}
