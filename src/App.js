@@ -1,6 +1,6 @@
-import "./app.css";
+// import "./app.css";
 import { useState } from "react";
-import Camera from "./components/Camera";
+import DynamicBoxCam from "./components/DynamicBoxCam";
 import FixBoxCam from "./components/FixBoxCam";
 import Options from "./components/Options";
 import CameraTabs from "./components/CameraTabs";
@@ -14,9 +14,9 @@ function App() {
 
   return (
     <Grid container spacing={2}>
-      <Grid item xs={12} sm={9}>
+      <Grid item xs={12} sm={6} md={9}>
         <CameraTabs>
-          <Camera
+          <DynamicBoxCam
             {...{
               barcodeType,
               resolution,
@@ -32,7 +32,7 @@ function App() {
           />
         </CameraTabs>
       </Grid>
-      <Grid item xs={12} sm={3}>
+      <Grid item xs={12} sm={6} md={3}>
         <Options
           {...{
             barcodeType,

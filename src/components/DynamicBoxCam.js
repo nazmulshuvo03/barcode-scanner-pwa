@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
 import Quagga from "quagga";
 import Camera from "./Camera";
-import { Grid, Switch, Typography, Button } from "@material-ui/core";
+import { Button, Grid, Switch, Typography } from "@material-ui/core";
 import { CAMERA_FACE } from "../Constants";
 
-const FixBoxCam = (props) => {
+const DynamicBoxCam = (props) => {
   const { barcodeType, resolution, workers } = props;
   const [cameraOn, setCameraOn] = useState(false);
   const [cameraFace, setCameraFace] = useState(CAMERA_FACE[1].value);
@@ -35,31 +35,6 @@ const FixBoxCam = (props) => {
   };
 
   const onInitSuccess = () => {
-    var drawingCtx = Quagga.canvas.ctx.overlay,
-      drawingCanvas = Quagga.canvas.dom.overlay;
-
-    let distance = 50,
-      center = 0,
-      width = Number(drawingCanvas.getAttribute("width")),
-      height = Number(drawingCanvas.getAttribute("height"));
-
-    drawingCtx.clearRect(0, 0, width, height);
-
-    Quagga.ImageDebug.drawPath(
-      [
-        [center + distance, height - distance],
-        [center + distance, center + distance],
-        [width - distance, center + distance],
-        [width - distance, height - distance],
-      ],
-      { x: 0, y: 1 },
-      drawingCtx,
-      {
-        color: "rgba(255, 255, 255, 0.5)",
-        lineWidth: 100,
-      }
-    );
-
     setResult("item details loading...");
     Quagga.start();
     setVideoInit(true);
@@ -97,11 +72,11 @@ const FixBoxCam = (props) => {
           inputStream: {
             name: "Live",
             type: "LiveStream",
-            target: document.querySelector("#fix_box_video"),
+            target: document.querySelector("#video"),
             constraints: {
               // width: 640,
-              // width: resolution,
-              // height: 480,
+              width: resolution,
+              height: 480,
               // facingMode: "environment",
               // deviceId: "7832475934759384534",
               facingMode: cameraFace,
@@ -144,6 +119,59 @@ const FixBoxCam = (props) => {
           onInitSuccess();
         }
       );
+
+      //detecting boxes on stream
+      Quagga.onProcessed((result) => {
+        var drawingCtx = Quagga.canvas.ctx.overlay,
+          drawingCanvas = Quagga.canvas.dom.overlay;
+
+        // console.log("result", result);
+        if (result) {
+          if (result.boxes) {
+            drawingCtx.clearRect(
+              0,
+              0,
+              Number(drawingCanvas.getAttribute("width")),
+              Number(drawingCanvas.getAttribute("height"))
+            );
+            // result.boxes
+            //   .filter(function (box) {
+            //     return box !== result.box;
+            //   })
+            //   .forEach(function (box) {
+            //     Quagga.ImageDebug.drawPath(box, { x: 0, y: 1 }, drawingCtx, {
+            //       color: "green",
+            //       lineWidth: 2,
+            //     });
+            //   });
+            Quagga.ImageDebug.drawPath(
+              result.boxes[0],
+              { x: 0, y: 1 },
+              drawingCtx,
+              {
+                color: "#00F",
+                lineWidth: 2,
+              }
+            );
+          }
+
+          if (result.box) {
+            Quagga.ImageDebug.drawPath(result.box, { x: 0, y: 1 }, drawingCtx, {
+              color: "#00F",
+              lineWidth: 2,
+            });
+          }
+
+          if (result.codeResult && result.codeResult.code) {
+            Quagga.ImageDebug.drawPath(
+              result.line,
+              { x: "x", y: "y" },
+              drawingCtx,
+              { color: "red", lineWidth: 3 }
+            );
+          }
+        }
+      });
 
       Quagga.onDetected(onDetected);
       return () => Quagga.stop();
@@ -205,7 +233,7 @@ const FixBoxCam = (props) => {
                   </div>
                 </div>
               ) : (
-                <Camera id={"fix_box_video"} videoInit={videoInit} />
+                <Camera id={"video"} videoInit={videoInit} />
               )}
             </div>
           </Grid>
@@ -219,4 +247,4 @@ const FixBoxCam = (props) => {
   );
 };
 
-export default FixBoxCam;
+export default DynamicBoxCam;
