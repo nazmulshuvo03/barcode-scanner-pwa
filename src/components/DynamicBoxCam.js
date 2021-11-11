@@ -196,8 +196,8 @@ const DynamicBoxCam = (props) => {
   return (
     <>
       <div>
-        <Grid container justifyContent="center" alignItems="center">
-          <Grid item xs={4}>
+        <Grid container justifyContent="space-between" alignItems="center">
+          <Grid item>
             <Button
               variant="outlined"
               onClick={() => setCameraOn((prev) => !prev)}
@@ -205,7 +205,7 @@ const DynamicBoxCam = (props) => {
               {cameraOn ? "Stop" : "Start"}
             </Button>
           </Grid>
-          <Grid item xs={8}>
+          <Grid item>
             <Typography variant="caption">Front</Typography>
             <Switch
               checked={cameraFace === CAMERA_FACE[1].value}
