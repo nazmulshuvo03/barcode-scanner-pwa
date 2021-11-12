@@ -35,31 +35,6 @@ const FixBoxCam = (props) => {
   };
 
   const onInitSuccess = () => {
-    var drawingCtx = Quagga.canvas.ctx.overlay,
-      drawingCanvas = Quagga.canvas.dom.overlay;
-
-    let distance = 50,
-      center = 0,
-      width = Number(drawingCanvas.getAttribute("width")),
-      height = Number(drawingCanvas.getAttribute("height"));
-
-    drawingCtx.clearRect(0, 0, width, height);
-
-    Quagga.ImageDebug.drawPath(
-      [
-        [center + distance, height - distance],
-        [center + distance, center + distance],
-        [width - distance, center + distance],
-        [width - distance, height - distance],
-      ],
-      { x: 0, y: 1 },
-      drawingCtx,
-      {
-        color: "rgba(255, 255, 255, 0.5)",
-        lineWidth: 100,
-      }
-    );
-
     setResult("item details loading...");
     Quagga.start();
     setVideoInit(true);
@@ -144,6 +119,33 @@ const FixBoxCam = (props) => {
           onInitSuccess();
         }
       );
+
+      Quagga.onProcessed((result) => {
+        var drawingCtx = Quagga.canvas.ctx.overlay,
+          drawingCanvas = Quagga.canvas.dom.overlay;
+
+        let distance = 50,
+          center = 0,
+          width = Number(drawingCanvas.getAttribute("width")),
+          height = Number(drawingCanvas.getAttribute("height"));
+
+        drawingCtx.clearRect(0, 0, width, height);
+
+        Quagga.ImageDebug.drawPath(
+          [
+            [center + distance, height - distance],
+            [center + distance, center + distance],
+            [width - distance, center + distance],
+            [width - distance, height - distance],
+          ],
+          { x: 0, y: 1 },
+          drawingCtx,
+          {
+            color: "rgba(255, 255, 255, 0.5)",
+            lineWidth: 100,
+          }
+        );
+      });
 
       Quagga.onDetected(onDetected);
       return () => Quagga.stop();
