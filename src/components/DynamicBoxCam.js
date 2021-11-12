@@ -198,12 +198,16 @@ const DynamicBoxCam = (props) => {
       <div>
         <Grid container justifyContent="space-between" alignItems="center">
           <Grid item>
-            <Button
-              variant="outlined"
-              onClick={() => setCameraOn((prev) => !prev)}
-            >
-              {cameraOn ? "Stop" : "Start"}
-            </Button>
+            {!cameraOn ? (
+              <Button
+                variant="outlined"
+                onClick={() => setCameraOn((prev) => !prev)}
+              >
+                Start
+              </Button>
+            ) : (
+              ""
+            )}
           </Grid>
           <Grid item>
             <Typography variant="caption">Front</Typography>
