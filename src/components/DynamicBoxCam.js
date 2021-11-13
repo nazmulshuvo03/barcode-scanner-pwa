@@ -13,6 +13,9 @@ const DynamicBoxCam = (props) => {
   const [attempts, setAttempts] = useState(0);
   const [barcode, setBarcode] = useState(null);
   const [result, setResult] = useState("item details loading...");
+  const [codeFormat, setCodeFormat] = useState("");
+  const [angle, setAngle] = useState(null);
+  // const [resultBox, setResultBox] = useState(null);
 
   const handleCameraFaceChange = (event) => {
     if (event.target.checked) {
@@ -43,6 +46,9 @@ const DynamicBoxCam = (props) => {
   const onDetected = (result) => {
     console.log(result);
     setBarcode(result.codeResult.code);
+    setCodeFormat(result.codeResult.format);
+    setAngle(result.angle);
+    // setResultBox(result.box);
     Quagga.offDetected(onDetected);
     fetch(
       `https://world.openfoodfacts.org/api/v0/product/${result.codeResult.code}.json`
@@ -242,7 +248,9 @@ const DynamicBoxCam = (props) => {
             </div>
           </Grid>
           <Grid item xs={12}>
-            <h3>{barcode}</h3>
+            {barcode && <h3>Code: {barcode}</h3>}
+            {codeFormat && <h3>Format: {codeFormat}</h3>}
+            {angle && <h3>Angle: {angle}</h3>}
             <h2>{result}</h2>
           </Grid>
         </Grid>
