@@ -9,8 +9,8 @@ const useStyles = makeStyles((theme) => ({
     "& video": {
       height: "100%",
       width: "100%",
-      maxHeight: "640px",
-      maxWidth: "480px",
+      // maxHeight: "640px",
+      // maxWidth: "480px",
       objectFit: "cover",
     },
     "& canvas": {
@@ -19,8 +19,8 @@ const useStyles = makeStyles((theme) => ({
       left: 0,
       height: "100%",
       width: "100%",
-      maxHeight: "640px",
-      maxWidth: "480px",
+      // maxHeight: "640px",
+      // maxWidth: "480px",
     },
   },
 }));
