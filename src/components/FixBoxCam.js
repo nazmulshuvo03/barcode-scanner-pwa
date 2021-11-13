@@ -129,8 +129,11 @@ const FixBoxCam = (props) => {
           width = Number(drawingCanvas.getAttribute("width")),
           height = Number(drawingCanvas.getAttribute("height"));
 
+        let boxWidth = 100;
+
         drawingCtx.clearRect(0, 0, width, height);
 
+        // Fix box to place the barcode in the center
         Quagga.ImageDebug.drawPath(
           [
             [center + distance, height - distance],
@@ -142,7 +145,41 @@ const FixBoxCam = (props) => {
           drawingCtx,
           {
             color: "rgba(255, 255, 255, 0.5)",
-            lineWidth: 100,
+            lineWidth: boxWidth,
+          }
+        );
+
+        // Horizontal red line from the center of the box
+        Quagga.ImageDebug.drawPath(
+          [
+            [
+              center + distance + boxWidth / 2,
+              height / 2 - distance + boxWidth / 2,
+            ],
+            [
+              width - distance - boxWidth / 2,
+              height / 2 - distance + boxWidth / 2,
+            ],
+          ],
+          { x: 0, y: 1 },
+          drawingCtx,
+          {
+            color: "rgba(246, 17, 38, 0.5)",
+            lineWidth: 2,
+          }
+        );
+
+        // Vertical red line from the center of the box
+        Quagga.ImageDebug.drawPath(
+          [
+            [center + width / 2, center + distance + boxWidth / 2],
+            [center + width / 2, height - distance - boxWidth / 2],
+          ],
+          { x: 0, y: 1 },
+          drawingCtx,
+          {
+            color: "rgba(246, 17, 38, 0.5)",
+            lineWidth: 2,
           }
         );
       });
