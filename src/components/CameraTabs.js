@@ -66,6 +66,7 @@ export default function SimpleTabs(props) {
         >
           <Tab label="Dynamic boundary Cam" {...a11yProps(0)} />
           <Tab label="Fixed boundary Cam" {...a11yProps(1)} />
+          <Tab label="QR Scanner Cam" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       {children.map((child, index) => (

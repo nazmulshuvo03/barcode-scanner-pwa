@@ -2,6 +2,7 @@
 import { useState } from "react";
 import DynamicBoxCam from "./components/DynamicBoxCam";
 import FixBoxCam from "./components/FixBoxCam";
+import QRCamera from "./components/QRCamera";
 import Options from "./components/Options";
 import CameraTabs from "./components/CameraTabs";
 import { Grid } from "@material-ui/core";
@@ -30,6 +31,7 @@ function App() {
               workers,
             }}
           />
+          <QRCamera />
         </CameraTabs>
       </Grid>
       <Grid item xs={12} sm={6} md={3}>
