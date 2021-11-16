@@ -5,6 +5,11 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   qrSection: {
     height: "480px",
+    width: "640px",
+    [theme.breakpoints.down("sm")]: {
+      height: "320px",
+      width: "100%",
+    },
     position: "relative",
     "& section": {
       height: "100%",
