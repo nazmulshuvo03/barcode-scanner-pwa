@@ -1,40 +1,44 @@
 // import "./app.css";
-import { useState } from "react";
+// import { useState } from "react";
 import DynamicBoxCam from "./components/DynamicBoxCam";
 import FixBoxCam from "./components/FixBoxCam";
 import QRCamera from "./components/QRCamera";
-import Options from "./components/Options";
+// import Options from "./components/Options";
 import CameraTabs from "./components/CameraTabs";
 import { Grid } from "@material-ui/core";
-import { BARCODE_TYPES, RESOLUTIONS, WORKERS } from "./Constants";
+// import { BARCODE_TYPES, RESOLUTIONS, WORKERS } from "./Constants";
 
 function App() {
-  const [barcodeType, setBarcodeType] = useState(BARCODE_TYPES[0].value);
-  const [resolution, setResolution] = useState(RESOLUTIONS[0].value);
-  const [workers, setWorkers] = useState(WORKERS[2].value);
+  // const [barcodeType, setBarcodeType] = useState(BARCODE_TYPES[0].value);
+  // const [resolution, setResolution] = useState(RESOLUTIONS[0].value);
+  // const [workers, setWorkers] = useState(WORKERS[2].value);
 
   return (
     <Grid container spacing={2}>
-      <Grid item xs={12} sm={6} md={9}>
+      <Grid item xs>
         <CameraTabs>
           <DynamicBoxCam
-            {...{
-              barcodeType,
-              resolution,
-              workers,
-            }}
+            {
+              ...{
+                // barcodeType,
+                // resolution,
+                // workers,
+              }
+            }
           />
           <FixBoxCam
-            {...{
-              barcodeType,
-              resolution,
-              workers,
-            }}
+            {
+              ...{
+                // barcodeType,
+                // resolution,
+                // workers,
+              }
+            }
           />
           <QRCamera />
         </CameraTabs>
       </Grid>
-      <Grid item xs={12} sm={6} md={3}>
+      {/* <Grid item xs={12} sm={6} md={3}>
         <Options
           {...{
             barcodeType,
@@ -45,7 +49,7 @@ function App() {
             setWorkers,
           }}
         />
-      </Grid>
+      </Grid> */}
     </Grid>
   );
 }

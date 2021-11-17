@@ -100,14 +100,14 @@ const DynamicBoxCam = (props) => {
           numOfWorkers: workers,
           locate: true,
           decoder: {
-            // readers: [
-            //   "ean_reader",
-            //   "ean_8_reader",
-            //   "upc_reader",
-            //   "code_39_reader",
-            //   "code_128_reader",
-            // ],
-            readers: [barcodeType],
+            readers: [
+              "ean_reader",
+              "ean_8_reader",
+              "upc_reader",
+              "code_39_reader",
+              "code_128_reader",
+            ],
+            // readers: [barcodeType],
             debug: {
               drawBoundingBox: false,
               showFrequency: false,
