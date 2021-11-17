@@ -39,6 +39,12 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
   },
+  container: {
+    padding: "30px",
+    [theme.breakpoints.down("sm")]: {
+      padding: "6px",
+    },
+  },
 }));
 
 export default function SimpleTabs(props) {
@@ -67,7 +73,7 @@ export default function SimpleTabs(props) {
       </AppBar>
       {children.map((child, index) => (
         <TabPanel value={value} index={index}>
-          {child}
+          <div className={classes.container}>{child}</div>
         </TabPanel>
       ))}
     </div>
