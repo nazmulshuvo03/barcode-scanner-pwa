@@ -140,25 +140,25 @@ const DynamicBoxCam = (props) => {
               Number(drawingCanvas.getAttribute("width")),
               Number(drawingCanvas.getAttribute("height"))
             );
-            // result.boxes
-            //   .filter(function (box) {
-            //     return box !== result.box;
-            //   })
-            //   .forEach(function (box) {
-            //     Quagga.ImageDebug.drawPath(box, { x: 0, y: 1 }, drawingCtx, {
-            //       color: "green",
-            //       lineWidth: 2,
-            //     });
-            //   });
-            Quagga.ImageDebug.drawPath(
-              result.boxes[0],
-              { x: 0, y: 1 },
-              drawingCtx,
-              {
-                color: "#00F",
-                lineWidth: 2,
-              }
-            );
+            result.boxes
+              .filter(function (box) {
+                return box !== result.box;
+              })
+              .forEach(function (box) {
+                Quagga.ImageDebug.drawPath(box, { x: 0, y: 1 }, drawingCtx, {
+                  color: "green",
+                  lineWidth: 2,
+                });
+              });
+            // Quagga.ImageDebug.drawPath(
+            //   result.boxes[0],
+            //   { x: 0, y: 1 },
+            //   drawingCtx,
+            //   {
+            //     color: "#00F",
+            //     lineWidth: 2,
+            //   }
+            // );
           }
 
           if (result.box) {
